@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_08_172223) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_08_171136) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,12 +70,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_08_172223) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.bigint "bookmark_id", null: false
+    t.bigint "list_id", null: false
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "list_id", null: false
-    t.index ["bookmark_id"], name: "index_reviews_on_bookmark_id"
     t.index ["list_id"], name: "index_reviews_on_list_id"
   end
 
@@ -83,6 +81,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_08_172223) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookmarks", "lists"
   add_foreign_key "bookmarks", "movies"
-  add_foreign_key "reviews", "bookmarks"
   add_foreign_key "reviews", "lists"
 end
