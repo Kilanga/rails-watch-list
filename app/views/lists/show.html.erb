@@ -57,6 +57,16 @@
       <div class="bg-white rounded p-3">
         <h5>Add your review</h5>
         <%= simple_form_for [@list, @list.reviews.build] do |f| %>
+          <% if @review && @review.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+              <ul>
+                <% @review.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
           <%= f.input :content, placeholder: "Add your review here..." %>
           <%= f.submit class: "btn btn-flat mt-2" %>
         <% end %>

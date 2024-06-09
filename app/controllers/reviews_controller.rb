@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+  before_action :set_list
+
   def create
     @list = List.find(params[:list_id])
     @review = @list.reviews.build(review_params)
@@ -19,6 +21,10 @@ class ReviewsController < ApplicationController
   end
 
   private
+
+  def set_list
+    @list = List.find(params[:list_id])
+  end
 
   def review_params
     params.require(:review).permit(:content)
